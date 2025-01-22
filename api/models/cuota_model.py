@@ -20,20 +20,21 @@ class Cuota:
 
     @classmethod
     def get_all(cls):
-        query = "SELECT * FROM cuotas"
+        query = "SELECT * FROM gym_management.cuotas"
         results = DatabaseConnection.fetch_all(query)
+        print("results: ",results)
         return [cls(**row) for row in results]
 
     @classmethod
     def get_by_id(cls, cuota_id):
-        query = "SELECT * FROM cuotas WHERE id = %s"
+        query = "SELECT * FROM gym_management.cuotas WHERE id = %s"
         params = (cuota_id,)
         result = DatabaseConnection.fetch_one(query, params=params)
         return cls(**result) if result else None
 
     @classmethod
     def create(cls, cuota):
-        query = """INSERT INTO cuotas (id_socio, fecha_inicio, fecha_fin, estado)
+        query = """INSERT INTO gym_management.cuotas (id_socio, fecha_inicio, fecha_fin, estado)
                    VALUES (%s, %s, %s, %s)"""
         params = (cuota.id_socio, cuota.fecha_inicio, cuota.fecha_fin, cuota.estado)
         DatabaseConnection.execute_query(query, params=params)

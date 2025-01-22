@@ -1,5 +1,6 @@
 from flask import request
-from ..models.cuota_model import Cuota, Socio
+from ..models.cuota_model import Cuota
+from ..models.socio_model import Socio
 
 class CuotaController:
 
