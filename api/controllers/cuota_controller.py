@@ -7,22 +7,23 @@ class CuotaController:
     @classmethod
     def pagar_cuota(cls):
         data = request.json
-        id_socio = data.get('id_socio')
-
-        socio = Socio.get_by_id(id_socio)
+        socio_id = data.get('socio_id')
+        socio = Socio.get_by_id(socio_id)
         if not socio:
             return {"message": "Socio no encontrado"}, 404
 
         nueva_cuota = Cuota(
-            id_socio=id_socio,
+            socio_id=socio_id,
+            fecha_pago=data.get('fecha_pago'),
             fecha_inicio=data['fecha_inicio'],
             fecha_fin=data['fecha_fin'],
-            estado='pagada'
+            estado='activa',
+            monto=data['monto']
         )
+
         Cuota.create(nueva_cuota)
 
-        # Actualiza el estado del socio
-        socio.estado_membresia = 'activo'
+        socio.estado = 'activo'
         Socio.update(socio)
 
         return {"message": "Pago registrado y membresía activada"}, 201
