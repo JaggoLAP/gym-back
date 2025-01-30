@@ -3,14 +3,17 @@ from dotenv import load_dotenv
 import os
 from flask_cors import CORS
 from src.db import Database
-from src.controllers.member_controller import member_routes_bp
-from src.controllers.payment_controller import payment_routes_bp
-from src.controllers.activity_controller import activity_routes_bp
+from src.routes.member_routes import member_routes_bp
+from src.routes.payment_routes import payment_routes_bp
+from src.routes.activity_routes import activity_routes_bp
+from src.routes.employee_routes import employee_routes_bp 
+
 from src.utils.error_handlers import register_error_handlers
+from flask_jwt_extended import JWTManager
+from src.routes.auth_routes import auth_bp
 
 # Cargar variables de entorno desde el archivo .env
 load_dotenv()
-
 
 def create_app():
     """Función de fábrica para crear la aplicación Flask."""
@@ -21,7 +24,6 @@ def create_app():
 
     # Cargar la configuración según el entorno
     env = os.getenv("FLASK_ENV", "development").lower()
-
     print(f"Ejecutando en modo {env}")
 
     # Seleccionar la configuración apropiada
@@ -37,6 +39,9 @@ def create_app():
     # Inicializar la conexión con la base de datos
     app.db = Database(app.config)
 
+    # Configurar JWT
+    jwt = JWTManager(app)
+
     # Registrar manejadores de errores personalizados
     register_error_handlers(app)
 
@@ -44,9 +49,8 @@ def create_app():
     app.register_blueprint(member_routes_bp)
     app.register_blueprint(payment_routes_bp)
     app.register_blueprint(activity_routes_bp)
-    
-
-
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(employee_routes_bp) 
     # Ruta principal para verificar que el servidor está activo
     @app.route("/")
     def home():
@@ -63,8 +67,6 @@ def create_app():
             print(f"Error al verificar la conexión: {e}")
 
     return app
-
-
 
 if __name__ == "__main__":
     # Crear y ejecutar la aplicación
