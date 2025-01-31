@@ -11,9 +11,15 @@ def get_socios():
 def get_socio(socio_id):
     return MemberController.get_member(current_app.db, socio_id)
 
+@member_routes_bp.route("/email/<string:email>", methods=["GET"])
+def get_socio_email(email):
+    print('email by routes: ', email)
+    return MemberController.get_member_by_email(current_app.db, email)
+
 @member_routes_bp.route("/", methods=["POST"])
 def add_socio():
     data = request.json
+    print("routes, data!",data)
     return MemberController.create_member(current_app.db, data)
 
 @member_routes_bp.route("/<int:socio_id>", methods=["DELETE"])

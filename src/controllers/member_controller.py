@@ -19,6 +19,19 @@ class MemberController:
             return jsonify(socio[0]), 200
         except Exception as e:
             return jsonify({"error": str(e)}), 500
+        
+    @staticmethod
+    def get_member_by_email(db, email):
+        try:
+            print('email by controller: ', email)
+            socio = MemberModel.get_member_by_email(db, email)
+            print('socio by controller: ', socio)
+            if not socio:
+                return jsonify({"message": "Socio no encontrado."}), 404
+            print('json by controller: ', jsonify(socio[0]))
+            return jsonify(socio[0]), 200
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
 
     @staticmethod
     def create_member(db, data):

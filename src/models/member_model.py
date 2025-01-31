@@ -12,6 +12,14 @@ class MemberModel:
         return db.execute_query(query, (socio_id,))
     
     @staticmethod
+    def get_member_by_email(db, email):
+        query = "SELECT id, email FROM socios WHERE email = %s"
+        print('query by email: ', query)
+        result = db.execute_query(query, (email,))
+        print('result by email: ', result)
+        return result
+    
+    @staticmethod
     def create_member(db, data):
         query = """
         INSERT INTO socios (nombre, apellido, email, telefono, direccion, password)

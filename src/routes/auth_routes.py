@@ -8,6 +8,7 @@ auth_bp = Blueprint('auth', __name__)
 def login():
     """Maneja la autenticación del usuario."""
     data = request.json
+    print("¡Hola, data!",data)
     email = data.get("email")
     password = data.get("password")
 

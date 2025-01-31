@@ -11,9 +11,9 @@ class DevelopmentConfig(Config):
     DEBUG = True
     DB_HOST = os.getenv("DB_HOST", "localhost")
     DB_PORT = int(os.getenv("DB_PORT", 3306))
-    DB_USER = os.getenv("DB_USER", "root")
-    DB_PASSWORD = os.getenv("DB_PASSWORD", "password")
-    DB_NAME = os.getenv("DB_NAME", "gym_management_dev")
+    DB_USER = os.getenv("DB_USER", "juan")
+    DB_PASSWORD = os.getenv("DB_PASSWORD", "123456")
+    DB_NAME = os.getenv("DB_NAME", "gym_management")
 
     
     DB_URI = f"mysql+mysqlconnector://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
@@ -23,8 +23,8 @@ class ProductionConfig(Config):
     DEBUG = False
     DB_HOST = os.getenv("DB_HOST", "localhost")
     DB_PORT = int(os.getenv("DB_PORT", 3306))
-    DB_USER = os.getenv("DB_USER", "root")
-    DB_PASSWORD = os.getenv("DB_PASSWORD", "password")
+    DB_USER = os.getenv("DB_USER", "juan")
+    DB_PASSWORD = os.getenv("DB_PASSWORD", "12345")
     DB_NAME = os.getenv("DB_NAME", "gym_management_prod")
 
     
@@ -35,8 +35,8 @@ class TestingConfig(Config):
     TESTING = True
     DB_HOST = os.getenv("DB_HOST", "localhost")
     DB_PORT = int(os.getenv("DB_PORT", 3306))
-    DB_USER = os.getenv("DB_USER", "root")
-    DB_PASSWORD = os.getenv("DB_PASSWORD", "password")
+    DB_USER = os.getenv("DB_USER", "juan")
+    DB_PASSWORD = os.getenv("DB_PASSWORD", "123456")
     DB_NAME = os.getenv("DB_NAME", "gym_management_test")
 
     

@@ -72,6 +72,7 @@ class Database:
         finally:
             cursor.close()
             connection.close()
+    
     def test_connection(self):
         """Prueba la conexión a la base de datos."""
         connection = self.get_connection()

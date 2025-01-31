@@ -2,7 +2,7 @@ from flask import jsonify, request, current_app
 from src.models.payment_model import obtener_todos_los_precios, obtener_precio, actualizar_precio
 from datetime import datetime, timedelta
 from src.db import DbError
-from dateutil.relativedelta import relativedelta
+#from dateutil.relativedelta import relativedelta
 def listar_precios():
     """Devuelve todos los precios en formato JSON."""
     precios = obtener_todos_los_precios()
